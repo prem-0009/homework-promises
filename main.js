@@ -8,15 +8,15 @@ console.clear();
 // use it as your argument to invoke your compareToTen function
 
 const compareToTen = (num) => {
-  return new Promise((resolve, reject) => {
-    return num < 10 ? reject(`${num} is less than 10, error!`) : resolve(num);
-  });
+  return new Promise((resolve, reject) => 
+     num < 10 ? reject(`${num} is less than 10, error!`) : resolve(num)
+  );
 };
 
 let randomNum = Math.floor(Math.random() * 20 + 1);
 
 compareToTen(randomNum)
-  .then((data) => {
+  .then(data => {
     console.log("\n------------------one------------------------------");
     console.log(`${data} is greater or equal to 10, resolved!`);
   })
@@ -106,7 +106,6 @@ const makeAllCaps = (arr) => {
        
     if (allWords) {
       let allUpper = arr.map((item, i, arr1) => {
-        console.log(item.toUpperCase())
         return item.toUpperCase();
       })  
       resolve(allUpper);
@@ -115,7 +114,7 @@ const makeAllCaps = (arr) => {
     }
   });
 };
-// makeAllCaps
+
 
 makeAllCaps(complicatedArray)
   .then((data) => {
@@ -341,23 +340,11 @@ const playerFunction = (arr) => {
 
 playerFunction(athletes)
   .then((data) => {
-    // console.log(data)
-
-    let addSport = data.map((item, i) => {
-      let { name, position, sport, team } = item;
-
-      if (position === "guard") {
-        sport = "basketball";
-      }
-      if (position === "quarterback") {
-        sport = "football";
-      }
-
-      // return position = 'guard' ? {name, position, sport:'basketball', team}
-      // : position = 'quarterback' ? {name, position, sport:'football', team}
-      // : 'hi'
-      return { name, position, sport, team };
-    });
+    let addSport = data.map(({ name, position, sport, team }) => 
+           position === 'guard' ? { position, sport:'basketball', team } 
+           : position === 'quarterback' ? { name, position, sport:"football", team }
+           : 'hello'//???????????????????????? any way to avoid this situation
+    );
     // / In your next thenable, Console.log a string like the example below for each player:
     // 'Tom Bradshaw plays football and is a quarterback for the Pittsburgh Steelers'
     // Only choose the players who play football and use deconstruction and the ternary operator to complete this piece
@@ -368,7 +355,7 @@ playerFunction(athletes)
     );
 
     console.log(addSport);
-    return addSport.filter((item) => item.sport === "football");
+    return addSport.filter(item => item.sport === "football");
   })
   .then((data) => {
     // let {name, position, sport, team} = data;
